@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+  "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.hotel.domain.Guest" table="guest" discriminator-value="0">
+        <id column="id" name="id" type="java.lang.Integer">
+            <generator class="native"/>
+        </id>
+        <discriminator type="integer" formula="case when id &gt; 0 then 1 else 0 end"/>
+        <property column="username" name="userName" type="java.lang.String"/>
+        <property column="password" name="passWord" type="java.lang.String"/>
+        <property column="email" name="email" type="java.lang.String"/>
+        <property column="phoneno" name="phoneNo" type="java.lang.String"/>
+        <property column="firstname" name="firstName" type="java.lang.String"/>
+		<property column="lastname" name="lastName" type="java.lang.String"/>
+		<property column="created_at" name="createdDate" type="java.util.Date"/> 
+		<property column="modified_at" name="modifiedDate" type="java.util.Date"/> 
+        <subclass name="com.hotel.domain.impl.GuestImpl" discriminator-value="1"/>
+
+    </class>
+</hibernate-mapping>

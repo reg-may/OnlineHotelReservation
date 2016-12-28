@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE struts-config PUBLIC
+          "-//Apache Software Foundation//DTD Struts Configuration 1.3//EN"
+          "http://struts.apache.org/dtds/struts-config_1_3.dtd">
+
+<struts-config>
+
+
+<!-- ================================================ Form Bean Definitions -->
+
+    <form-beans>
+      <form-bean name="loginForm" type="com.hotel.web.model.LoginForm"></form-bean>
+      <form-bean name="registerForm" type="com.hotel.web.model.RegisterForm"></form-bean>
+      <form-bean name="roomTypeForm" type="com.hotel.web.model.RoomTypeForm"></form-bean>
+      <form-bean name="roomTypeListForm" type="com.hotel.web.model.RoomTypeListForm"></form-bean>
+      <form-bean name="roomForm" type="com.hotel.web.model.RoomForm"></form-bean>
+    </form-beans>
+
+
+<!-- ========================================= Global Exception Definitions -->
+
+    <global-exceptions>
+     
+    </global-exceptions>
+
+
+<!-- =========================================== Global Forward Definitions -->
+
+    <global-forwards>
+    	<forward name="home" path="/main.do"/>
+        <forward name="login" path="/login.do" />
+        <forward name="registration" path="/registerGuest.do" />
+        <forward name="guestDetails" path="/guestDetails.do"/>
+        <forward name="addRoomType" path="/addRoomType.do"/>
+        <forward name="hotelRoomDetails" path="/roomDetails.do"/>
+    </global-forwards>
+
+
+<!-- =========================================== Action Mapping Definitions -->
+
+    <action-mappings>
+        <action path="/registerGuest"
+        parameter="/registration.jsp"
+        type="org.apache.struts.actions.ForwardAction"/>
+        
+        <action path="/main"
+        parameter="/main.jsp"
+        type="org.apache.struts.actions.ForwardAction"/>
+        
+        <action path="/addRoomType"
+        parameter="/addRoomType.jsp"
+        type="org.apache.struts.actions.ForwardAction"/> 
+    	
+    	<action path="/roomDetails"
+        parameter="/addRoom.jsp"
+        type="org.apache.struts.actions.ForwardAction"/> 
+     	<!--   <action path="/login"
+                type="com.hotel.web.controller.LoginAction"
+                name="loginForm"
+                scope="request"
+                validate="false"
+                input="/login.jsp" />
+                <action path="/logout"
+                type="com.hotel.web.controller.LogoutAction"
+                scope="request"
+                validate="false" />
+        
+            
+         <action path="/main"
+                type="com.hotel.web.controller.MainAction"
+                scope="request"
+                input = "main.jsp"
+                validate="false" /> 
+         <action path="/guestDetails"
+                type="com.regine.web.controller.GuestDetailsAction"
+                name="guestDetailsForm"
+                scope="request"
+                validate="false" 
+                input="/guestDetails.jsp"/> -->  
+        <action path="/addOnlineHotelRoom"
+        		name="roomForm"
+                type="com.hotel.web.controller.RoomAction"
+                scope="request"
+                input = "/addRoom.jsp"
+                validate="false">
+                 <forward name="main" path="/main.jsp"/>
+        </action>
+        <action path="/register"
+        		name="registerForm"
+                type="com.hotel.web.controller.RegisterAction"
+                scope="request"
+                input = "/registration.jsp"
+                validate="false">
+                 <forward name="login" path="/login.jsp"/>
+        </action>
+          
+         <action path="/roomType"
+        		name="roomTypeForm"
+                type="com.hotel.web.controller.RoomTypeAction"
+                scope="request"
+                input = "/addRoomType.jsp"
+                validate="false">
+                 <forward name="roomTypeList" path="/roomTypeAll.do"/>
+        </action>
+        <action path="/roomTypeAll"
+        		name="roomTypeListForm"
+                type="com.hotel.web.controller.RoomTypeListAction"
+                scope="request"
+                input = "/roomTypeList.jsp"
+                validate="false">
+                <forward name="roomTypeList" path="/roomTypeList.jsp"/>
+        </action>
+       
+    </action-mappings>
+    <message-resources parameter="ApplicationResources" />
+
+
+</struts-config>
+

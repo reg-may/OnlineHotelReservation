@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+  "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.hotel.domain.Room" table="room" discriminator-value="0">
+        <id column="id" name="id" type="java.lang.Integer">
+            <generator class="native"/>
+        </id>
+        <discriminator type="integer" formula="case when id &gt; 0 then 1 else 0 end"/>
+        <property column="number" name="number" type="java.lang.String"/>
+        <property column="name" name="name" type="java.lang.String"/>
+        <property column="status" name="status" type="java.lang.String"/>
+        <property name="smoke" type="java.lang.Boolean">
+        	<column name="smoke" sql-type="tinyint"></column>
+        </property>
+		<property column="created_at" name="createdDate" type="java.util.Date"/> 
+		<property column="modified_at" name="modifiedDate" type="java.util.Date"/>
+		 
+        <many-to-one name="roomType" class="com.hotel.domain.RoomType" 
+                column="room_type_id" fetch="join" lazy="false" not-null="true"/>
+                
+        <subclass name="com.hotel.domain.impl.RoomImpl" discriminator-value="1"/>
+
+    </class>
+</hibernate-mapping>
